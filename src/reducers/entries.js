@@ -1,14 +1,15 @@
 const initialState = (localStorage.journal) ?
 JSON.parse(localStorage.journal)
-: [{		 
+: [{
 	key:0,
-	name:'first journal',
-	notes:'some notes',
-	date:'7/10/2017 15:46',
+	parent:0,
+	name:'journal title',
+	notes:'Journal notes',
+	date:'todays date',
 	edited:null
 }]
 	 
-const addaJournal = (key, state) => {
+const addEntry = (key, state) => {
  const now = new Date()
  return Object.assign([], [...state,
 	 {
@@ -24,7 +25,7 @@ const addLocal=(state) => {
  localStorage.setItem('journal', JSON.stringify(state))
  }
 
-const editaJournal = (key, state) => {
+const editEntry = (key, state) => {
  const now = new Date()	
  var newState = state.map( (item, index) => {
 			 if(item.key !== key.key) {
@@ -46,7 +47,7 @@ const editaJournal = (key, state) => {
  return newState;
 }
 
-const deleteJournal = (key, state) => {
+const deleteEntry = (key, state) => {
 	const now = new Date()	
 	var newState = state.map( (item, index) => {
 				if(item.key !== key.key) {
@@ -61,15 +62,15 @@ const deleteJournal = (key, state) => {
 	return newState;
  }
 
-const Journal = (state = initialState, action) => {
-	console.log('in journal//')
- 	switch(action.type) {
-	 case 'ADD_JOURNAL_SELECTED' : 
-	 return addaJournal(action.payload.key,state);
-	 case 'EDIT_JOURNAL_SELECTED' :
-	 return editaJournal(action.payload,state);
-	 case 'DELETE_JOURNAL_SELECTED' :
-	 return deleteJournal(action.payload,state);
+const Entry = (state = initialState, action) => {
+	console.log('journal:')
+ switch(action.type) {
+	 case 'ADD_ENTRY_SELECTED' : 
+	 return addEntry(action.payload.key,state);
+	 case 'EDIT_ENTRY_SELECTED' :
+	 return editEntry(action.payload,state);
+	 case 'DELETE_ENTRY_SELECTED' :
+	 return deleteEntry(action.payload,state);
 	 default: 
 		 return state;
  }
@@ -78,4 +79,4 @@ const Journal = (state = initialState, action) => {
 }
 
 
-export default Journal;
+export default Entry;
