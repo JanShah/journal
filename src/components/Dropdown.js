@@ -23,18 +23,20 @@ export default class Tools extends React.Component {
   render() {
 		const titles = this.props.titles
 		const active = this.props.active
+		console.log(this.props)
 		return (      
 			<MuiThemeProvider>
 				<Toolbar>
 				<ToolbarGroup>
 					<Dialog 
 					add={this.props.add}
-					title={'Add a Journal'}
+					title={'Add a '+this.props.dialogType}
+					type={this.props.dialogType}
 					/>
 					<FontIcon className="muidocs-icon-custom-sort" />
 				</ToolbarGroup>
 				<ToolbarGroup firstChild={true}>
-					{window.innerWidth>600?<DropDownMenu value={active} onChange={this.handleChange} autoWidth={false}>
+					{window.innerWidth>600?<DropDownMenu value={active} onChange={this.handleChange} autoWidth={true}>
 						{titles.map((title,index)=><MenuItem style={{float:'left'}} key={index} value={index} primaryText={title} />)}
 					</DropDownMenu>:<IconMenu
 						onChange={this.handleSmallChange}

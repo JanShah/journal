@@ -7,9 +7,11 @@ import {addJournal,selectJournal} from '../actions';
 class Navigation extends Component{
 
 	addNewJournal(data){
-		console.log(data,'adding new journal')
-		
-		this.props.addJournal({key:this.props.journals.length})
+		console.log('journal adder in nav: ',data)
+		this.props.addJournal({key:this.props.journals.length,data:data})
+		setTimeout(()=>{
+			this.changeActive({value:this.props.journals.length-1})
+		},500)
 	}
 
 	changeActive(value){
@@ -18,6 +20,7 @@ class Navigation extends Component{
 
 	journalTitles() {
 		return <Dropdown 
+			dialogType='Journal'
 			titles={this.props.journals} 
 			changeActive={this.changeActive.bind(this)} 
 			active={this.props.active} 

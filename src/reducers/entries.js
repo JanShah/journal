@@ -71,7 +71,7 @@ const deleteEntry = (key, state) => {
  }
 
 const Entry = (state = initialState, action) => {
-	console.log('journal:')
+	// console.log('entries:')
  switch(action.type) {
 	 case 'ADD_ENTRY_SELECTED' : 
 	 return addEntry(action.payload.key,state);

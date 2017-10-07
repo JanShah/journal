@@ -8,13 +8,14 @@ JSON.parse(localStorage.journal)
 	edited:null
 }]
 	 
-const addaJournal = (key, state) => {
+const addaJournal = (action, state) => {
  const now = new Date()
+ console.log('journal reducer adding: : ',state,action)
  return Object.assign([], [...state,
 	 {
-		 key: key,
-		 notes: "a New journal",
-		 name: "Sample data",
+		 key: action.key,
+		 notes: action.data.notes,
+		 name: action.data.name,
 		 date:now
 	 }
  ]) 
@@ -62,10 +63,10 @@ const deleteJournal = (key, state) => {
  }
 
 const Journal = (state = initialState, action) => {
-	console.log('in journal//')
+	// console.log('in journal//')
  	switch(action.type) {
 	 case 'ADD_JOURNAL_SELECTED' : 
-	 return addaJournal(action.payload.key,state);
+	 return addaJournal(action.payload,state);
 	 case 'EDIT_JOURNAL_SELECTED' :
 	 return editaJournal(action.payload,state);
 	 case 'DELETE_JOURNAL_SELECTED' :

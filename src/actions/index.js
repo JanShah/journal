@@ -14,7 +14,7 @@ export const selectEntry = journal => {
 }
 
 export const addJournal = journal => {
-	console.info('clicked to add journal: '+journal)
+	console.info('clicked to add journal: ',journal)
 	return {
 		type: 'ADD_JOURNAL_SELECTED',
 		payload: journal

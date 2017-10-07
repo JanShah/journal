@@ -20,6 +20,7 @@ const Textbox = (props) => {
   return <div>
   <TextField
     fullWidth={true}
+    required={props.required}
     id={props.id}
     floatingLabelText={props.label}
     floatingLabelStyle={styles.floatingLabelStyle}

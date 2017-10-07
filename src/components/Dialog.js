@@ -6,13 +6,7 @@ import Textbox from './Textbox'
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ActionThumbUp from 'material-ui/svg-icons/action/thumb-up';
 import NavigationCancel from 'material-ui/svg-icons/navigation/cancel';
-
-/**
- * Dialog with action buttons. The actions are passed in as an array of React objects,
- * in this example [FlatButtons](/#/components/flat-button).
- *
- * You can also close this dialog by clicking outside the dialog, or with the 'Esc' key.
- */
+import BottomBar from './BottomBar'
 
 const customContentStyle = {
 	width: '100%',
@@ -23,29 +17,49 @@ const fbStyle={
 	marginRight:10
 }
 export default class DialogSimple extends React.Component {
-  state = {
-		open: false
-	};
+
+	constructor(props) {
+		super(props)
+		this.state= {
+			open: false,
+			bottomBar:false,
+			error:'add a new '+this.props.type
+			
+		}
+	}
 	
   handleOpen = () => {
 		this.setState({open: true});
 		setTimeout(()=>{
-			document.querySelector('#jTitle').focus()
+			document.querySelector('#Name_'+this.props.type).focus()
 		},10)
 	};
 
   handleClose = (event) => {
-		this.setState({open: false});
+		this.setState({open: false, bottomBar:false});
   };
   handleCancel = () => {
-		this.setState({open: false});
+		this.setState({open: false, bottomBar:false});
 	}
 
-	handleEnd=()=>{
-		this.setState({open: false});
-		const title=document.querySelector('#jTitle').value
-		const desc=document.querySelector('#jDesc').value
-		this.props.add({title:title,desc:desc})
+	handleEnd=(event)=>{
+		event.preventDefault()
+		console.log('adding dialog:: ')
+		const name=document.querySelector('#Name_'+this.props.type).value
+		const notes=document.querySelector('#Notes_'+this.props.type).value
+		if(name.length&&notes.length){
+			this.props.add({name:name,notes:notes})
+			this.setState({open: false,bottomBar: false});			
+		} else {
+			this.errorMessage([name,notes])
+			// this.setState({bottomBar: true});			
+		}
+	}
+	errorMessage(data){
+		this.setState({
+			error:!data[0].length?'Add a Title for the '+this.props.type:'Add a description for the '+this.props.type,
+			bottomBar:true
+		})
 	}
   render() {
     const actions = [
@@ -64,9 +78,8 @@ export default class DialogSimple extends React.Component {
 			<NavigationCancel/>
 		</FloatingActionButton>,
 		];
-		const textBoxes = <div><Textbox label={'Journal Title'} autoFocus id={'jTitle'}/>
-		<Textbox label={'Journal Introduction'} id={'jDesc'}/></div>
-
+		const textBoxes = <div><Textbox label={this.props.type+' Title'} required={true} autoFocus id={'Name_'+this.props.type}/>
+		<Textbox label={this.props.type+' Notes'} id={'Notes_'+this.props.type}/></div>
     return (
 			<MuiThemeProvider>
       <div>
@@ -82,8 +95,8 @@ export default class DialogSimple extends React.Component {
           onRequestClose={this.handleClose}
         >
 				{textBoxes}
+				{this.state.bottomBar?<BottomBar open={this.state.bottomBar} message={this.state.error} />:null}
         </Dialog>
-
       </div>
 			</MuiThemeProvider>
     );
