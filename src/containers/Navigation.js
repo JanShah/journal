@@ -2,27 +2,32 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import Dropdown from '../components/Dropdown'
-import {addJournal} from '../actions';
-import {createIcon} from '../icons';
+import {addJournal,selectJournal} from '../actions';
 
 class Navigation extends Component{
 
-	addNewJournal(){
+	addNewJournal(data){
+		console.log(data,'adding new journal')
+		
 		this.props.addJournal({key:this.props.journals.length})
 	}
 
-	viewJournalEntries(event){
-		console.log('view entries: ',event)
+	changeActive(value){
+		this.props.selectJournal({journal:value})
 	}
 
 	journalTitles() {
-		// console.log('getting journals')
-		return <Dropdown titles={this.props.journals} add={this.addNewJournal.bind(this)} />
+		return <Dropdown 
+			titles={this.props.journals} 
+			changeActive={this.changeActive.bind(this)} 
+			active={this.props.active} 
+			add={this.addNewJournal.bind(this)} />
 	}
+	
 
 	render() {
-		return <div style={{float:'left',width:'100%'}}>
-			{this.journalTitles()}	
+		return <div style={{float:'left',width:'100%' }}>
+			{this.journalTitles()}
 		</div>		
 	}
 }
@@ -30,14 +35,16 @@ class Navigation extends Component{
 function mapStateToProps(state) {
 	const journalNames = state.journals.map(journal=>journal.name)
 	return {	
-		journals:journalNames
+		journals:journalNames,
+		active:state.active.activeJournal
 	}
 }
 
 function matchDispatchToProps (dispatch) {
 	let boundActionCreators = bindActionCreators({		
-		addJournal:addJournal
-}, dispatch);
+		addJournal:addJournal,
+		selectJournal:selectJournal
+	}, dispatch);
 	return boundActionCreators;
 }
 

@@ -8,15 +8,18 @@ export const editIcon=()=><svg viewBox="0 0 36.189998626708984 36.18999862670898
 	<path d="M0 28.69v7.5h7.5l22.13-22.13-7.5-7.5L0 28.69zM35.41 8.28c.78-.78.78-2.05 0-2.83L30.74.78c-.78-.78-2.05-.78-2.83 0l-3.66 3.66 7.5 7.5 3.66-3.66z">
 	</path>
 </svg>
-export const createIcon=()=><svg viewBox="0 0 40 32" 
-	aria-labelledby="ahysi-material-create-new-folder-title" 
-	id="si-material-create-new-folder" 
-	width="40" 
-	height="32">
-	<title id="ahysi-material-create-new-folder-title">icon create-new-folder</title>
-	<path d="M36 4H20l-4-4H4C1.79 0 .02 1.79.02 4L0 28c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V8c0-2.21-1.79-4-4-4zm-2 16h-6v6h-4v-6h-6v-4h6v-6h4v6h6v4z">
+export const createIcon=()=><svg 
+	viewBox="0 0 40 40" 
+	aria-labelledby="aassi-material-add-circle-outline-title" 
+	fill='orange'
+	id="si-material-add-circle-outline" 
+	width="30px"
+	height="30px">
+	<title 
+	id="aassi-material-add-circle-outline-title">icon add-circle-outline</title>
+	<path d="M22 10h-4v8h-8v4h8v8h4v-8h8v-4h-8v-8zM20 0C8.95 0 0 8.95 0 20s8.95 20 20 20 20-8.95 20-20S31.05 0 20 0zm0 36c-8.82 0-16-7.18-16-16S11.18 4 20 4s16 7.18 16 16-7.18 16-16 16z">
 	</path>
-</svg>
+	</svg>
 
 export const viewIcon=()=><svg 
 	viewBox="0 0 36 32" 

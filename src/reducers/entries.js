@@ -1,9 +1,16 @@
-const initialState = (localStorage.journal) ?
-JSON.parse(localStorage.journal)
+const initialState = (localStorage.journalEntry) ?
+JSON.parse(localStorage.journalEntry)
 : [{
 	key:0,
 	parent:0,
-	name:'journal title',
+	name:'journal entry title',
+	notes:'Journal notes',
+	date:'todays date',
+	edited:null
+},{
+	key:1,
+	parent:0,
+	name:'journal entry title',
 	notes:'Journal notes',
 	date:'todays date',
 	edited:null
@@ -13,7 +20,8 @@ const addEntry = (key, state) => {
  const now = new Date()
  return Object.assign([], [...state,
 	 {
-		 key: key,
+		 key: key.index,
+		 parent:key.parent,
 		 notes: "a New journal",
 		 name: "Sample data",
 		 date:now
@@ -22,7 +30,7 @@ const addEntry = (key, state) => {
 }
 
 const addLocal=(state) => {
- localStorage.setItem('journal', JSON.stringify(state))
+ localStorage.setItem('journalEntry', JSON.stringify(state))
  }
 
 const editEntry = (key, state) => {

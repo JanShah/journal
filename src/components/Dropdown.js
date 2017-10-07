@@ -9,41 +9,45 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Dialog from './Dialog'
 
 export default class Tools extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 0,
-    };
-  }
-
-  handleChange = (event, index, value) => this.setState({value});
+  handleChange = (event, index, value) => {
+		console.log(value)
+		this.props.changeActive({value})
+	};
+	handleSmallChange = (event, value, index) => {
+		console.log(value)
+		this.props.changeActive({value})
+	};
 
   render() {
 		const titles = this.props.titles
+		const active = this.props.active
 		return (      
 			<MuiThemeProvider>
 				<Toolbar>
 				<ToolbarGroup>
-					<ToolbarTitle text="Options" />
+					<Dialog 
+					add={this.props.add}
+					title={'Add a Journal'}
+					/>
 					<FontIcon className="muidocs-icon-custom-sort" />
-					<ToolbarSeparator />
-					<RaisedButton label="Create Journal" primary={true} onClick={this.props.add}/>
 				</ToolbarGroup>
 				<ToolbarGroup firstChild={true}>
-					<DropDownMenu value={this.state.value} onChange={this.handleChange}>
+					{window.innerWidth>600?<DropDownMenu value={active} onChange={this.handleChange} autoWidth={false}>
 						{titles.map((title,index)=><MenuItem style={{float:'left'}} key={index} value={index} primaryText={title} />)}
-					</DropDownMenu>
-					<IconMenu
-							iconButtonElement={
-								<IconButton touch={true}>
-									<NavigationExpandMoreIcon />
-								</IconButton>
-							}>
-						<MenuItem primaryText="More Info" />
-						</IconMenu>
+					</DropDownMenu>:<IconMenu
+						onChange={this.handleSmallChange}
+						iconButtonElement={
+							<IconButton touch={true}>
+								<NavigationExpandMoreIcon />
+							</IconButton>
+						}>
+						{titles.map((title,index)=><MenuItem key={index} value={index} primaryText={title} />)}
+					</IconMenu>}
+					
 				</ToolbarGroup>
 			</Toolbar>
 			</MuiThemeProvider>

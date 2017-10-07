@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Navigation from './containers/Navigation'
+import Main from './containers/Main'
+import ActiveJournal from './containers/ActiveJournal'
 class App extends Component {
   render() {
     return (
@@ -9,6 +10,10 @@ class App extends Component {
         <header className="App-header">
           <Navigation />
         </header>
+        <div>
+          <ActiveJournal />
+          <Main />
+        </div>
       </div>
     );
   }

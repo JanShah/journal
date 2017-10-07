@@ -5,6 +5,13 @@ export const selectJournal = journal => {
 		payload: journal
 	}
 }
+export const selectEntry = journal => {
+	// console.info('clicked journal: '+ journal.name+' '+journal.key)
+	return {
+		type: 'ENTRY_SELECTED',
+		payload: journal
+	}
+}
 
 export const addJournal = journal => {
 	console.info('clicked to add journal: '+journal)
