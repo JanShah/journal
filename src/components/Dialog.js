@@ -1,6 +1,5 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Textbox from './Textbox'
@@ -26,40 +25,48 @@ const fbStyle={
 export default class DialogSimple extends React.Component {
   state = {
 		open: false
-  };
-
+	};
+	
   handleOpen = () => {
-    this.setState({open: true});
-  };
+		this.setState({open: true});
+		setTimeout(()=>{
+			document.querySelector('#jTitle').focus()
+		},10)
+	};
 
   handleClose = (event) => {
 		this.setState({open: false});
-		const title=document.querySelector('#jTitle').value
-		const desc=document.querySelector('#jDesc').value
-		this.props.add({title:title,desc:desc})
   };
   handleCancel = () => {
 		this.setState({open: false});
 	}
+
+	handleEnd=()=>{
+		this.setState({open: false});
+		const title=document.querySelector('#jTitle').value
+		const desc=document.querySelector('#jDesc').value
+		this.props.add({title:title,desc:desc})
+	}
   render() {
     const actions = [
-      <FloatingActionButton  
-				mini={true}   
-				style={fbStyle}   
-        secondary={true}
-        onClick={this.handleCancel}>
-			<NavigationCancel/>
-			</FloatingActionButton>,
-      <FloatingActionButton
-        label="Submit"
-        
-        keyboardFocused={true}
-        onClick={this.handleClose}
-      >
+		<FloatingActionButton
+			label="Submit"
+			style={fbStyle}   
+			keyboardFocused={true}
+			onClick={this.handleEnd}>
 			<ActionThumbUp />
-			</FloatingActionButton>,
+		</FloatingActionButton>,
+    <FloatingActionButton  
+			label="Cancel"
+			mini={true}   
+      secondary={true}
+      onClick={this.handleCancel}>
+			<NavigationCancel/>
+		</FloatingActionButton>,
 		];
-		
+		const textBoxes = <div><Textbox label={'Journal Title'} autoFocus id={'jTitle'}/>
+		<Textbox label={'Journal Introduction'} id={'jDesc'}/></div>
+
     return (
 			<MuiThemeProvider>
       <div>
@@ -74,8 +81,7 @@ export default class DialogSimple extends React.Component {
           open={this.state.open}
           onRequestClose={this.handleClose}
         >
-        <Textbox label={'Journal Title'} id={'jTitle'}/>
-        <Textbox label={'Journal Introduction'} id={'jDesc'}/>
+				{textBoxes}
         </Dialog>
 
       </div>

@@ -16,8 +16,8 @@ const styles = {
   },
 };
 
-const Textbox = (props) => (
-  <div>
+const Textbox = (props) => {
+  return <div>
   <TextField
     fullWidth={true}
     id={props.id}
@@ -26,5 +26,5 @@ const Textbox = (props) => (
     floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
   />  
   </div>
-);
+};
 export default Textbox;

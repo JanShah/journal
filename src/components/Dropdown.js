@@ -2,12 +2,10 @@ import React from 'react';
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
-// import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
-import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/menu';
+import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import MenuItem from 'material-ui/MenuItem';
 import DropDownMenu from 'material-ui/DropDownMenu';
-import RaisedButton from 'material-ui/RaisedButton';
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Dialog from './Dialog'
 
@@ -42,7 +40,7 @@ export default class Tools extends React.Component {
 						onChange={this.handleSmallChange}
 						iconButtonElement={
 							<IconButton touch={true}>
-								<NavigationExpandMoreIcon />
+								<NavigationMenu />
 							</IconButton>
 						}>
 						{titles.map((title,index)=><MenuItem key={index} value={index} primaryText={title} />)}
