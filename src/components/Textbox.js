@@ -17,6 +17,7 @@ const styles = {
 };
 
 const Textbox = (props) => {
+  console.log('textbox',props.value)
   return <div>
   <TextField
     fullWidth={true}
@@ -25,6 +26,8 @@ const Textbox = (props) => {
     floatingLabelText={props.label}
     floatingLabelStyle={styles.floatingLabelStyle}
     floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+    onChange={props.onChange}
+    value={props.value}
   />  
   </div>
 };

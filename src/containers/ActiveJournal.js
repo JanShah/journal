@@ -12,7 +12,7 @@ class ActiveJournal extends Component {
 			<h3>{journal.notes}</h3>
 		</div>
 	}
-	
+
 	render() {
 		return <div>{this.showEntries()}</div>
 	}
@@ -20,6 +20,7 @@ class ActiveJournal extends Component {
 
 function mapStateToProps(state) {
 	const active = state.active.activeJournal
+	console.log('all: ',state)
 	const journal = state.journals.filter(journal=>journal.key===active)[0]
 	return {	
 		journal:journal

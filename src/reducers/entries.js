@@ -1,16 +1,30 @@
 const initialState = (localStorage.journalEntry) ?
 JSON.parse(localStorage.journalEntry)
 : [{
-	key:0,
-	parent:0,
-	name:'journal entry title',
+	key:1,
+	parent:1,
+	name:'journal entry title for journal 1',
 	notes:'Journal notes',
 	date:'todays date',
 	edited:null
 },{
-	key:1,
-	parent:0,
-	name:'journal entry title',
+	key:2,
+	parent:2,
+	name:'Another journal entry for journal 2',
+	notes:'Journal notes',
+	date:'todays date 1',
+	edited:null
+},{
+	key:3,
+	parent:1,
+	name:'Another journal entry title for journal 1',
+	notes:'Journal notes',
+	date:'todays date',
+	edited:null
+},{
+	key:4,
+	parent:2,
+	name:'journal entry for journal 2',
 	notes:'Journal notes',
 	date:'todays date',
 	edited:null
