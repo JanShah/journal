@@ -1,3 +1,5 @@
+//todo  getDate function
+
 const initialState = (localStorage.journal) ?
 JSON.parse(localStorage.journal)
 : [{		 
@@ -17,14 +19,16 @@ JSON.parse(localStorage.journal)
 const addaJournal = (action, state) => {
  const now = new Date()
  console.log('journal reducer adding: : ',state,action)
- return Object.assign([], [...state,
+ const newState =  Object.assign([], [...state,
 	 {
 		 key: action.key,
 		 notes: action.data.notes,
 		 name: action.data.name,
 		 date:now
 	 }
- ]) 
+ ])
+ addLocal(newState)
+ return newState;
 }
 
 const addLocal=(state) => {
@@ -58,9 +62,6 @@ const deleteJournal = (key, state) => {
 	var newState = state.map( (item, index) => {
 				if(item.key !== key.key) {
 						// only return items not being deleted
-						// if only life were so simple. 
-						// some kind of marker needs to be 
-						// added elsewhere to delete its children
 						return item;
 				}   
 		});

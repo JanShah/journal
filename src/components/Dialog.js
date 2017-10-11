@@ -85,7 +85,7 @@ export default class DialogSimple extends Component {
 
 
   render() {
-		console.log('dialog props: ',this)
+		// console.log('dialog props: ',this)
 		const dataName = this.props.data.name
 		const dataNotes = this.props.data.notes
     const actions = [

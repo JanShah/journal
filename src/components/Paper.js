@@ -6,8 +6,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class PaperMain extends Component {
 
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 		this.state={
 			depth:0,
 		}
@@ -22,7 +22,8 @@ class PaperMain extends Component {
 			padding:'5px 0 20px 20px',
 			textAlign: 'left',
 			display: 'block',
-			float:'left'
+			float:'left',
+			...props.style
 		};
 	}
 
@@ -38,12 +39,18 @@ class PaperMain extends Component {
 	}
 	render(props) {
 		return <MuiThemeProvider>
-			<Paper 
+			{this.props.plain?<Paper 
 				onMouseOver={()=>this.handleMouseOver()}
 				onMouseOut={()=>this.handleMouseOut()}
 				onClick ={()=>this.props.onClick(this.props.item)}
 			style={this.style} 
 			zDepth={this.state.depth}>{this.props.children}</Paper>
+			:<Paper 
+				zDepth={this.props.depth}
+				style={this.props.style}
+			>
+				{this.props.children}
+				</Paper>}
 		</MuiThemeProvider>
 	}
 };

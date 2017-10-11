@@ -43,8 +43,7 @@ class Navigation extends Component{
 
 	editDialog(data){ 
 		this.Journal = data
-
-		console.log('Active Journal in Navigation: ',this.Journal)
+		// console.log('Active Journal in Navigation: ',this.Journal)
 		return <Dialog 
 			complete={this.editActiveJournal.bind(this)}
 			title={'Edit a Journal'}
@@ -58,7 +57,7 @@ class Navigation extends Component{
 	journals() {
 		const active = this.props.active
 		const titles = this.props.journals
-		console.log('getting navbar: ',this)
+		// console.log('getting navbar: ',this)
 		return (
 		<Navbar>
 			<ToolbarGroup>

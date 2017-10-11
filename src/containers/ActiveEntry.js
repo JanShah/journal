@@ -7,6 +7,8 @@ import NavigationBack from 'material-ui/svg-icons/navigation/arrow-back';
 import EditorEdit from 'material-ui/svg-icons/editor/mode-edit';
 import EditEntry from './EditEntry'
 import highlight from 'highlight.js'
+import Paper from '../components/Paper'
+
 class ActiveEntry extends Component {
 
 	state={
@@ -39,8 +41,15 @@ class ActiveEntry extends Component {
 			</div>
 	}
 
+	createMarkup(data) { return {__html: data}; };
 
 	showEntries() {
+		const innerStyle={  
+			lineHeight: 0,
+			overflow: 'auto',
+			fontSize: '12px',
+			maxHeight:window.innerHeight-200
+		}
 		const entry = this.props.entry
 		// console.log('should be blank unless active entry: ',entry)
 		if(entry)
@@ -49,8 +58,8 @@ class ActiveEntry extends Component {
 		onMouseOver={()=>this.setState({showing:true})}
 		onMouseLeave={()=>this.setState({showing:false})}
 		> {this.showActions()}
-			<h1>{entry.name}</h1>
-			<h3>{entry.notes}</h3>
+			<h1  dangerouslySetInnerHTML={this.createMarkup(entry.name)}></h1>
+			<div style={innerStyle} dangerouslySetInnerHTML={this.createMarkup(entry.notes)}></div>
 		</div>
 	}
 	returnToMain() {
@@ -66,13 +75,17 @@ class ActiveEntry extends Component {
 	render() {
 		const entryDetail = this.props.entry
 		
-		const entry = this.state.editing&&this.props.entry
-		?<EditEntry 
+		const entry = <EditEntry 
 		endEdit={this.startEditor.bind(this)} 
-		content={entryDetail} />:this.showEntries()
-		return <div>
+		content={entryDetail} 
+		readOnly = {!this.state.editing}
+		returnToMain={this.returnToMain.bind(this)} 
+		/>
+		if(entryDetail)
+		return <Paper style={{margin:20}} depth={2}>
 			{entry}
-		</div>
+		</Paper>
+		else return <div></div>
 	}
 }
 

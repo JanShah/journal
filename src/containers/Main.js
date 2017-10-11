@@ -7,20 +7,29 @@ import {selectEntry} from '../actions';
 
 
 class Main extends Component {
+
+	createMarkup(data) { return {__html: data}; };
+	
 	showEntries() {
+		const innerStyle={  
+			height: '150px',
+			overflow: 'hidden',
+			fontSize: '12px',
+			p:{margin:0}
+		}
 		const entries = this.props.entries
 		const active = this.props.active
 		if(entries.length&&!active) {
 			return entries.map((entry,index)=>{
 				return (
 				<Paper 
+					plain={true}
+					style={{cursor:'pointer'}}
 					onClick={this.editEntry.bind(this)} 
 					item={entry.key} 
 					key={index}>
-					<h3>
-						{entry.name}
-					</h3>
-					<p>{entry.notes}</p>
+					<p dangerouslySetInnerHTML={this.createMarkup(entry.name)}></p>
+					<div style={innerStyle} dangerouslySetInnerHTML={this.createMarkup(entry.notes)}></div>
 					<em>{entry.date}</em>
 				</Paper>
 				)
