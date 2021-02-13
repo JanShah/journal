@@ -8,7 +8,9 @@ import {selectEntry} from '../actions';
 
 class Main extends Component {
 
-	createMarkup(data) { return {__html: data}; };
+	createMarkup(data) { 
+		return {__html: data};
+	}
 	
 	showEntries() {
 		const innerStyle={  

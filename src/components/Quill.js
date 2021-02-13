@@ -32,6 +32,10 @@ export default class Quill extends Component {
 			]
 		}
 	}
+	componentWillUnmount() {
+	}
+	
+
 	render(props) {
 		return <ReactQuill theme={this.props.theme}
 			value={this.props.value}

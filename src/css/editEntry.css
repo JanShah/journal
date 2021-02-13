@@ -5,3 +5,33 @@
 .ql-toolbar.ql-snow {
 	border: 0;
 }
+
+.ql-container.ql-snow .ql-editor {
+  min-height: 400px;
+}
+
+.statusMessage {
+  text-align: right;
+  margin-right: 20px;
+}
+
+.statusMessage > span {
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 5px;
+  min-width: 129px;
+  display: inline-block;
+  text-align: center;
+}
+
+
+.statusMessage > span.saved {
+  background: #dcedc8;
+  color: #607d8b;
+}
+
+
+.statusMessage > span.updating {
+  background: #ffebee;
+  color: #c62828;
+}

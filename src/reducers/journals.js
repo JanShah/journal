@@ -1,6 +1,6 @@
 //todo  getDate function
-
-const initialState = (localStorage.journal) ?
+const starterJournal = localStorage.journal
+const initialState = (starterJournal && starterJournal!=="undefined") ?
 JSON.parse(localStorage.journal)
 : [{		 
 	key:1,

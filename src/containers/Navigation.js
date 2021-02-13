@@ -10,12 +10,12 @@ import IconButton from 'material-ui/IconButton';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import MenuItem from 'material-ui/MenuItem';
 import DropDownMenu from 'material-ui/DropDownMenu';
-import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
+import {ToolbarGroup} from 'material-ui/Toolbar';
 
 class Navigation extends Component{
 
+
 	addNewJournal(data){
-		console.log('journal adder in nav: ',data)
 		this.props.addJournal({key:this.props.journals.length+1,data:data})
 		setTimeout(()=>{
 			this.changeActive({value:this.props.journals.length})
@@ -34,7 +34,9 @@ class Navigation extends Component{
 	};
 
 	menuItem(titles) {
-		return titles.map((title,index)=><MenuItem key={index+1} value={index+1} primaryText={title} />)		
+		return titles.map((title,index)=>
+		<MenuItem key={index+1} value={index+1} primaryText={title} />
+		)		
 	}
 
 	editActiveJournal(data) {
@@ -43,7 +45,6 @@ class Navigation extends Component{
 
 	editDialog(data){ 
 		this.Journal = data
-		// console.log('Active Journal in Navigation: ',this.Journal)
 		return <Dialog 
 			complete={this.editActiveJournal.bind(this)}
 			title={'Edit a Journal'}
@@ -57,7 +58,6 @@ class Navigation extends Component{
 	journals() {
 		const active = this.props.active
 		const titles = this.props.journals
-		// console.log('getting navbar: ',this)
 		return (
 		<Navbar>
 			<ToolbarGroup>
@@ -91,7 +91,7 @@ class Navigation extends Component{
 	
 
 	render() {
-		return <div style={{float:'left',width:'100%' }}>
+		return this.props.isEditing?"":<div style={{float:'left',width:'100%' }}>
 			{this.journals()}
 		</div>		
 	}
